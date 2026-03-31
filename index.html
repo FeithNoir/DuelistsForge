@@ -1,109 +1,122 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duelist's Forge: El Forjador de Cartas</title>
+    <title data-i18n="page_title">Duelist's Forge: The Card Crafter</title>
     <link rel="stylesheet" href="style.css">
+    <!-- html2canvas to enable card downloading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
     <!-- Skip Navigation Link for Accessibility -->
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a href="#main-content" class="skip-link" data-i18n="skip_link">Skip to main content</a>
 
-    <!-- Header with a creative name -->
+    <!-- Header with language switcher -->
     <header class="page-header">
-        <h1>Duelist's Forge: El Forjador de Cartas</h1>
+        <h1 data-i18n="header_title">Duelist's Forge: The Card Crafter</h1>
+        <button id="lang-toggle" class="lang-btn" aria-label="Switch Language">
+            <span class="lang-text">🇺🇸 English</span>
+        </button>
     </header>
 
     <!-- Sidebar with card customization options -->
     <aside class="sidebar" aria-labelledby="sidebar-title">
-        <h2 id="sidebar-title">Personaliza tu Carta</h2>
+        <h2 id="sidebar-title" data-i18n="sidebar_title">Customize Card</h2>
         <form id="card-form">
             <fieldset>
-                <legend>Información Básica</legend>
+                <legend data-i18n="legend_core">Core Info</legend>
                 
                 <div class="form-group">
-                    <label for="input-name">Nombre de la Carta</label>
-                    <input type="text" id="input-name" placeholder="Ej: Mago Oscuro" maxlength="30">
+                    <label for="input-name" data-i18n="label_name">Card Name</label>
+                    <input type="text" id="input-name" data-i18n-placeholder="placeholder_name" placeholder="Ej: Dark Magician" maxlength="30">
                 </div>
 
                 <div class="form-group">
-                    <label for="input-attribute">Atributo</label>
-                    <select id="input-attribute">
-                        <option value="OSCURIDAD">OSCURIDAD</option>
-                        <option value="LUZ">LUZ</option>
-                        <option value="TIERRA">TIERRA</option>
-                        <option value="AGUA">AGUA</option>
-                        <option value="FUEGO">FUEGO</option>
-                        <option value="VIENTO">VIENTO</option>
-                        <option value="DIVINO">DIVINO</option>
+                    <label for="input-card-type" data-i18n="label_type">Card Type</label>
+                    <select id="input-card-type">
+                        <option value="monster-normal" data-i18n="opt_monster_normal">Normal Monster</option>
+                        <option value="monster-effect" data-i18n="opt_monster_effect" selected>Effect Monster</option>
+                        <option value="monster-synchro" data-i18n="opt_monster_synchro">Synchro Monster</option>
+                        <option value="monster-xyz" data-i18n="opt_monster_xyz">Xyz Monster</option>
+                        <option value="monster-pendulum" data-i18n="opt_monster_pendulum">Pendulum Monster</option>
+                        <option value="monster-link" data-i18n="opt_monster_link">Link Monster</option>
+                        <option value="spell" data-i18n="opt_spell">Spell Card</option>
+                        <option value="trap" data-i18n="opt_trap">Trap Card</option>
                     </select>
                 </div>
             </fieldset>
 
-            <fieldset>
-                <legend>Tipo y Nivel</legend>
+            <!-- Monster-specific fields grouped for dynamic visibility -->
+            <fieldset id="monster-fields-group">
+                <legend data-i18n="legend_monster">Monster Specs</legend>
 
                 <div class="form-group">
-                    <label for="input-card-type">Tipo de Carta</label>
-                    <select id="input-card-type">
-                        <option value="monster-normal">Monstruo Normal</option>
-                        <option value="monster-effect">Monstruo de Efecto</option>
-                        <option value="monster-synchro">Monstruo de Sincronía</option>
-                        <option value="monster-xyz">Monstruo Xyz</option>
-                        <option value="monster-pendulum">Monstruo de Péndulo</option>
-                        <option value="monster-link">Monstruo de Enlace</option>
-                        <option value="spell">Carta Mágica</option>
-                        <option value="trap">Carta Trampa</option>
+                    <label for="input-attribute" data-i18n="label_attribute">Attribute</label>
+                    <select id="input-attribute">
+                        <option value="DARK" data-i18n="attr_dark">DARK</option>
+                        <option value="LIGHT" data-i18n="attr_light">LIGHT</option>
+                        <option value="EARTH" data-i18n="attr_earth">EARTH</option>
+                        <option value="WATER" data-i18n="attr_water">WATER</option>
+                        <option value="FIRE" data-i18n="attr_fire">FIRE</option>
+                        <option value="WIND" data-i18n="attr_wind">WIND</option>
+                        <option value="DIVINE" data-i18n="attr_divine">DIVINE</option>
                     </select>
                 </div>
 
                 <div id="level-container" class="form-group">
-                    <label for="input-level">Nivel / Rango</label>
+                    <label for="input-level" data-i18n="label_level">Level-Rank</label>
                     <input type="number" id="input-level" min="1" max="12" value="7">
                 </div>
 
                 <div class="form-group">
-                    <label for="input-race">Tipo / Raza</label>
-                    <input type="text" id="input-race" placeholder="Ej: [Lanzador de Conjuros / Efecto]">
+                    <label for="input-race" data-i18n="label_race">Type-Race</label>
+                    <input type="text" id="input-race" data-i18n-placeholder="placeholder_race" placeholder="Ej: [Spellcaster / Effect]">
                 </div>
             </fieldset>
 
             <fieldset>
-                <legend>Contenido Visual</legend>
+                <legend data-i18n="legend_visuals">Visuals & Text</legend>
 
                 <div class="form-group">
-                    <label for="input-image">Imagen de Arte</label>
-                    <input type="file" id="input-image" accept="image/*">
+                    <label data-i18n="label_art">Art Image</label>
+                    <label for="input-image" class="custom-file-upload" role="button" tabindex="0">
+                        <span data-i18n="btn_upload">Upload Image</span>
+                    </label>
+                    <input type="file" id="input-image" accept="image/*" class="hidden-input">
                 </div>
 
                 <div class="form-group">
-                    <label for="input-text">Texto de la Carta</label>
-                    <textarea id="input-text" rows="4" placeholder="Describe el efecto o leyenda de la carta..."></textarea>
+                    <label for="input-text" data-i18n="label_description">Card Description</label>
+                    <textarea id="input-text" rows="4" data-i18n-placeholder="placeholder_text" placeholder="Describe the effect or lore..."></textarea>
                 </div>
             </fieldset>
+
+            <button type="button" id="download-btn" class="download-btn">
+                <span data-i18n="btn_download">Download Card</span>
+            </button>
         </form>
     </aside>
 
     <!-- Main Content for Card Preview -->
     <main id="main-content" class="main-viewer">
-        <div class="card-container" tabindex="0" role="button" aria-label="Vista previa de la carta. Presiona para girar.">
+        <div class="card-container" tabindex="0" role="button" id="card-preview-btn">
             <div class="card">
                 <!-- Card Front Face -->
-                <article class="card-face card-front" aria-live="polite">
+                <article id="card-front-side" class="card-face card-front" aria-live="polite">
                     <header class="card-header">
-                        <span id="display-name" class="card-title">Mago Oscuro</span>
-                        <span id="display-attribute" class="card-attribute">闇</span>
+                        <span id="display-name" class="card-title">Dark Magician</span>
+                        <span id="display-attribute" class="card-attribute" aria-label="Attribute">闇</span>
                     </header>
                     
-                    <div id="display-stars" class="stars" aria-label="Nivel 7">★★★★★★★</div>
+                    <span id="display-stars" class="card-stars" aria-label="Level 7">★★★★★★★</span>
                     
-                    <div id="display-art" class="art" role="img" aria-label="Arte de la carta"></div>
+                    <div id="display-art" class="art" role="img" data-i18n-aria="aria_art" aria-label="Card art"></div>
                     
                     <footer class="card-description">
-                        <strong id="display-race">[Lanzador de Conjuros]</strong>
-                        <p id="display-text">El más grande de los magos en cuanto al ataque y la defensa.</p>
+                        <strong id="display-race">[Spellcaster / Normal]</strong>
+                        <p id="display-text">The ultimate wizard in terms of attack and defense.</p>
                     </footer>
                 </article>
 
@@ -115,12 +128,14 @@
                 </article>
             </div>
         </div>
-        <p class="hint">Consejo: Haz clic en la carta o usa el teclado para girarla.</p>
+        <p class="hint" id="hint-text">
+            <span data-i18n="hint_prefix">Tip: Use the</span> <strong>Tab</strong> <span data-i18n="hint_suffix">key to focus and flip the card.</span>
+        </p>
     </main>
 
     <!-- Footer with attribution -->
     <footer class="page-footer">
-        <p>Desarrollado por <a href="https://github.com/feithnoir" target="_blank" rel="noopener noreferrer">feithnoir</a></p>
+        <p><span data-i18n="footer_dev">Developed by</span> <a href="https://github.com/feithnoir" target="_blank" rel="noopener noreferrer">feithnoir</a></p>
     </footer>
 
     <script src="index.js"></script>
