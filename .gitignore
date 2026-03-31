@@ -11,3 +11,6 @@ Thumbs.db
 # Temporary files
 *.log
 tmp/
+
+# Tutorial files
+tutorial.md
