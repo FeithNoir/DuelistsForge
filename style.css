@@ -9,8 +9,10 @@
     --card-height: 440px;
     --yugi-brown: #613b24;
     --yugi-border: #f1c40f;
-    --transition-speed: 0.6s;
+    --transition-speed: 0.8s;
     --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --star-bg: rgba(255, 69, 0, 0.85);
+    --attr-bg: rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -125,6 +127,26 @@ legend {
     padding: 0 0.5rem;
     font-size: 0.8rem;
     text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+legend::after {
+    content: '▼';
+    font-size: 0.6rem;
+    transition: transform 0.3s;
+}
+
+fieldset.collapsed legend::after {
+    transform: rotate(-90deg);
+}
+
+fieldset.collapsed > div, 
+fieldset.collapsed > button {
+    display: none;
 }
 
 .form-group {
@@ -221,8 +243,9 @@ input:focus, select:focus, textarea:focus {
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    background: radial-gradient(circle, #2c3e50 0%, #000000 100%);
+    background: radial-gradient(circle, #4a2c1a 0%, #121212 100%);
     overflow: hidden;
+    transition: background 0.5s ease;
 }
 
 .hint {
@@ -248,9 +271,7 @@ input:focus, select:focus, textarea:focus {
     transition: transform var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.2);
 }
 
-.card-container:hover .card,
-.card-container:focus .card,
-.card-container:focus-within .card {
+.card.is-flipped {
     transform: rotateY(180deg);
 }
 
@@ -259,22 +280,24 @@ input:focus, select:focus, textarea:focus {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     border-radius: 12px;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     border: 6px solid #1a1a1a;
+    transform: rotateY(0deg); /* Explicitly set base rotation */
 }
 
-.card-front { z-index: 2; padding: 12px; }
+.card-front { padding: 12px; transform: rotateY(0deg); }
 
 /* Dynamic Card Colors */
 .monster-normal { background: linear-gradient(135deg, #d4a76a, #8e6d45); }
 .monster-effect { background: linear-gradient(135deg, #e67e22, #d35400); }
 .monster-synchro { background: linear-gradient(135deg, #f5f5f5, #bdc3c7); color: #222; }
-.monster-xyz { background: linear-gradient(135deg, #2c3e50, #000000); }
-.monster-pendulum { background: linear-gradient(to bottom, #d35400 50%, #27ae60 50%); }
+.monster-xyz { background: linear-gradient(135deg, #1c1c1c, #333, #000); }
+.monster-pendulum { background: linear-gradient(to bottom, #d35400 0%, #e67e22 45%, #27ae60 55%, #1e8449 100%); }
 .monster-link { background: linear-gradient(135deg, #2980b9, #2c3e50); }
 .spell { background: linear-gradient(135deg, #16a085, #1abc9c); }
 .trap { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
@@ -285,20 +308,37 @@ input:focus, select:focus, textarea:focus {
     align-items: center;
     font-weight: bold;
     font-size: 1.1rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding-bottom: 4px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.card-attribute {
+    background: var(--attr-bg);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border: 1px solid rgba(255,255,255,0.3);
 }
 
 /* New Star Class */
 .card-stars {
     color: gold;
-    font-size: 1.25rem;
-    margin: 4px 0;
-    letter-spacing: 2px;
-    display: block;
+    font-size: 1.1rem;
+    margin: 6px 0;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 2px 12px;
+    background: var(--star-bg);
+    border-radius: 20px;
     min-height: 1.5rem;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
 }
 
 .art {

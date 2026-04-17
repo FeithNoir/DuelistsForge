@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <!-- html2canvas to enable card downloading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
+
 <body>
 
     <!-- Skip Navigation Link for Accessibility -->
@@ -27,10 +29,11 @@
         <form id="card-form">
             <fieldset>
                 <legend data-i18n="legend_core">Core Info</legend>
-                
+
                 <div class="form-group">
                     <label for="input-name" data-i18n="label_name">Card Name</label>
-                    <input type="text" id="input-name" data-i18n-placeholder="placeholder_name" placeholder="Ej: Dark Magician" maxlength="30">
+                    <input type="text" id="input-name" data-i18n-placeholder="placeholder_name"
+                        placeholder="Ej: Dark Magician" maxlength="30">
                 </div>
 
                 <div class="form-group">
@@ -72,7 +75,8 @@
 
                 <div class="form-group">
                     <label for="input-race" data-i18n="label_race">Type-Race</label>
-                    <input type="text" id="input-race" data-i18n-placeholder="placeholder_race" placeholder="Ej: [Spellcaster / Effect]">
+                    <input type="text" id="input-race" data-i18n-placeholder="placeholder_race"
+                        placeholder="Ej: [Spellcaster / Effect]">
                 </div>
             </fieldset>
 
@@ -89,7 +93,8 @@
 
                 <div class="form-group">
                     <label for="input-text" data-i18n="label_description">Card Description</label>
-                    <textarea id="input-text" rows="4" data-i18n-placeholder="placeholder_text" placeholder="Describe the effect or lore..."></textarea>
+                    <textarea id="input-text" rows="4" data-i18n-placeholder="placeholder_text"
+                        placeholder="Describe the effect or lore..."></textarea>
                 </div>
             </fieldset>
 
@@ -109,11 +114,11 @@
                         <span id="display-name" class="card-title">Dark Magician</span>
                         <span id="display-attribute" class="card-attribute" aria-label="Attribute">闇</span>
                     </header>
-                    
+
                     <span id="display-stars" class="card-stars" aria-label="Level 7">★★★★★★★</span>
-                    
+
                     <div id="display-art" class="art" role="img" data-i18n-aria="aria_art" aria-label="Card art"></div>
-                    
+
                     <footer class="card-description">
                         <strong id="display-race">[Spellcaster / Normal]</strong>
                         <p id="display-text">The ultimate wizard in terms of attack and defense.</p>
@@ -129,15 +134,18 @@
             </div>
         </div>
         <p class="hint" id="hint-text">
-            <span data-i18n="hint_prefix">Tip: Use the</span> <strong>Tab</strong> <span data-i18n="hint_suffix">key to focus and flip the card.</span>
+            <span data-i18n="hint_prefix">Tip: Use the</span> <strong>Tab</strong> <span data-i18n="hint_suffix">click
+                to flip the card.</span>
         </p>
     </main>
 
     <!-- Footer with attribution -->
     <footer class="page-footer">
-        <p><span data-i18n="footer_dev">Developed by</span> <a href="https://github.com/feithnoir" target="_blank" rel="noopener noreferrer">feithnoir</a></p>
+        <p><span data-i18n="footer_dev">Developed by</span> <a href="https://github.com/feithnoir" target="_blank"
+                rel="noopener noreferrer">feithnoir</a></p>
     </footer>
 
     <script src="index.js"></script>
 </body>
+
 </html>

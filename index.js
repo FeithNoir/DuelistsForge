@@ -123,9 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayArt = document.getElementById('display-art');
     const displayRace = document.getElementById('display-race');
     const displayText = document.getElementById('display-text');
-    const cardFace = document.querySelector('.card-front');
-    const cardPreviewBtn = document.getElementById('card-preview-btn');
+    const card = document.querySelector('.card');
     const cardFrontSide = document.getElementById('card-front-side');
+    const cardPreviewBtn = document.getElementById('card-preview-btn');
 
     // Attribute Mapping
     const attributeSymbols = {
@@ -220,8 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'monster-xyz', 'monster-pendulum', 'monster-link', 
             'spell', 'trap'
         ];
-        cardFace.classList.remove(...classesToRemove);
-        cardFace.classList.add(type);
+        cardFrontSide.classList.remove(...classesToRemove);
+        cardFrontSide.classList.add(type);
 
         if (type === 'spell' || type === 'trap') {
             displayStars.style.visibility = 'hidden';
@@ -272,10 +272,39 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
+     * Toggles flip state of the card
+     */
+    const toggleFlip = () => {
+        card.classList.toggle('is-flipped');
+    };
+
+    /**
+     * Collapsible fieldsets logic
+     */
+    const initCollapsibleFieldsets = () => {
+        const legends = document.querySelectorAll('fieldset legend');
+        legends.forEach(legend => {
+            const fieldset = legend.parentElement;
+            
+            // Set initial states as requested
+            const title = legend.getAttribute('data-i18n');
+            if (title === 'legend_visuals' || title === 'legend_monster') {
+                fieldset.classList.add('collapsed');
+            }
+
+            legend.addEventListener('click', () => {
+                fieldset.classList.toggle('collapsed');
+            });
+        });
+    };
+
+    /**
      * Downloads the card using html2canvas
      */
     const downloadCard = () => {
-        // We capture only the front side of the card
+        // Ensure the card is showing the front before download if possible, 
+        // but html2canvas will capture the element as it is in the DOM.
+        // We capture cardFrontSide specifically.
         html2canvas(cardFrontSide, {
             useCORS: true,
             scale: 2, // Better quality
@@ -315,8 +344,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Card Flip Flip Logic
+    cardPreviewBtn.addEventListener('click', toggleFlip);
+    cardPreviewBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleFlip();
+        }
+    });
+
     // Initialize
     updateUI();
     updateCardType();
     updateLevel();
+    initCollapsibleFieldsets();
 });

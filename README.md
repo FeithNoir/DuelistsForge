@@ -10,7 +10,9 @@ Welcome to **Duelist's Forge**! An interactive web application designed to creat
 - **Custom Image Upload**: A custom-styled upload button that lets you personalize your card with your own artwork.
 - **Card Export**: High-quality PNG download functionality powered by `html2canvas`, allowing you to save your creations.
 - **Dynamic Star System**: Automatic generation of level/rank stars via JavaScript, contained within a single optimized and styled element.
-- **Immersive 3D Effect**: Realistic card rotation triggered by mouse hover or keyboard focus, providing a premium feel.
+- **Immersive 3D Effect**: Interactive card rotation triggered by clicking or keyboard focus, providing a premium "reveal" feel. 
+- **Collapsible Sidebar**: Organization of customization options into foldable sections (fieldset) for a cleaner UI, with the most relevant info open by default.
+- **Improved Aesthetics**: Rounded capsules for level stars and attributes, smoother gradients for pendulum cards, and a warm forge-like background for the preview area.
 - **Accessibility (WCAG AA)**: Built with web accessibility in mind, including full keyboard navigation (Tab key to flip), semantic HTML5, and ARIA landmarks.
 
 ## Technologies Used
@@ -25,7 +27,7 @@ Welcome to **Duelist's Forge**! An interactive web application designed to creat
 1. Open `index.html` in any modern web browser.
 2. Use the sidebar to fill in your card's details such as Name, Type, and Description.
 3. Click the "Upload Image" button to add your custom art.
-4. Interact with the card by hovering or using the **Tab** key to see the 3D flip effect.
+4. Interact with the card by clicking it or using the **Tab** key to trigger the 3D flip effect and reveal its contents.
 5. Click the **Download Card** button to save a PNG of your design to your device.
 
 ## Potential Future Features (Roadmap)
