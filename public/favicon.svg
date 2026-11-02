@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Duelist's Forge">
+  <rect width="32" height="32" rx="6" fill="#121212"/>
+  <rect x="7" y="4" width="18" height="24" rx="2" fill="#c56a1a" stroke="#f1c40f" stroke-width="1.5"/>
+  <circle cx="20.5" cy="9" r="2.2" fill="#f1c40f"/>
+  <rect x="10" y="14" width="12" height="8" fill="#1a1a1a" stroke="#f1c40f" stroke-width="0.8"/>
+</svg>

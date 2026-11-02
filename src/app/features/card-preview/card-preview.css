@@ -1,0 +1,217 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.card-container {
+  width: min(var(--card-width), 100%);
+  aspect-ratio: var(--card-ratio);
+  perspective: 1200px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.card-container:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 6px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform var(--transition-speed) cubic-bezier(0.175, 0.885, 0.32, 1.2);
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 6px solid #1a1a1a;
+}
+
+.card-front {
+  padding: 12px;
+  color: #f7f7f7;
+}
+
+.card-front[data-frame='monster-normal'] {
+  background: linear-gradient(135deg, #d4a76a, #8e6d45);
+}
+.card-front[data-frame='monster-effect'] {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+}
+.card-front[data-frame='monster-synchro'] {
+  background: linear-gradient(135deg, #f5f5f5, #bdc3c7);
+  color: #1c1c1c;
+}
+.card-front[data-frame='monster-xyz'] {
+  background: linear-gradient(135deg, #1c1c1c, #333, #000);
+}
+.card-front[data-frame='monster-pendulum'] {
+  background: linear-gradient(to bottom, #d35400 0%, #e67e22 45%, #27ae60 55%, #1e8449 100%);
+}
+.card-front[data-frame='monster-link'] {
+  background: linear-gradient(135deg, #2980b9, #2c3e50);
+}
+.card-front[data-frame='spell'] {
+  background: linear-gradient(135deg, #0e7c6b, #1abc9c);
+}
+.card-front[data-frame='trap'] {
+  background: linear-gradient(135deg, #8e44ad, #9b59b6);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.card-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.card-attribute {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Forge Marks', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--attr-bg);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.card-stars {
+  align-self: flex-start;
+  color: gold;
+  font-size: 1.05rem;
+  margin: 6px 0;
+  letter-spacing: 1px;
+  padding: 2px 12px;
+  background: var(--star-bg);
+  border-radius: 20px;
+  min-height: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.card-stars.is-hidden {
+  visibility: hidden;
+}
+
+.art {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 8px 0;
+  border: 3px solid var(--yugi-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #222;
+}
+
+.art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-description {
+  background: rgba(255, 255, 255, 0.96);
+  color: #111;
+  padding: 8px;
+  font-size: 0.75rem;
+  min-height: 5.5rem;
+  border-radius: 2px;
+}
+
+.card-description strong {
+  display: block;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+  font-size: 0.8rem;
+}
+
+.card-description p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+  background: #613b24;
+  border-width: 10px;
+  border-color: #3d2417;
+}
+
+.back-seal {
+  width: 85%;
+  height: 85%;
+  border: 4px solid var(--yugi-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle, #3d2417 20%, #613b24 100%);
+}
+
+.back-ring {
+  position: absolute;
+  inset: 12%;
+  border: 3px dashed rgba(241, 196, 15, 0.75);
+  border-radius: 50%;
+}
+
+.back-title {
+  position: relative;
+  margin: 0;
+  padding: 0 1rem;
+  color: var(--accent-color);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 1.25rem;
+  text-align: center;
+  text-shadow: 2px 2px #000;
+}
+
+.hint {
+  margin: 1rem 0 0;
+  max-width: 36rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--muted-text);
+}

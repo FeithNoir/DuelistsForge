@@ -1,0 +1,12 @@
+<aside class="sidebar" aria-labelledby="sidebar-title">
+  <h2 id="sidebar-title">{{ messages().sidebarTitle }}</h2>
+  <app-card-editor
+    [exporting]="exporting()"
+    [exportFailed]="exportFailed()"
+    (downloadCard)="onDownload()"
+  />
+</aside>
+
+<main id="main-content" class="main-viewer" tabindex="-1">
+  <app-card-preview />
+</main>
