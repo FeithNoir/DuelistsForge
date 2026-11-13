@@ -1,0 +1,16 @@
+<fieldset class="fold-section" [class.collapsed]="collapsed()">
+  <legend>
+    <button
+      type="button"
+      class="fold-toggle"
+      [attr.aria-expanded]="!collapsed()"
+      [attr.aria-controls]="panelId"
+      (click)="toggle()"
+    >
+      {{ title() }}
+    </button>
+  </legend>
+  <div [id]="panelId" [hidden]="collapsed()">
+    <ng-content />
+  </div>
+</fieldset>

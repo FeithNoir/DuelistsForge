@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" role="img" aria-label="Placeholder artwork">
+  <defs>
+    <linearGradient id="forge-sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a2a1c"/>
+      <stop offset="1" stop-color="#14110e"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="440" fill="url(#forge-sky)"/>
+  <rect x="28" y="28" width="544" height="384" fill="none" stroke="#f1c40f" stroke-width="8"/>
+  <polygon points="300,92 348,188 452,202 372,274 394,378 300,324 206,378 228,274 148,202 252,188" fill="#f1c40f"/>
+  <polygon points="300,140 330,198 392,206 346,250 360,312 300,278 240,312 254,250 208,206 270,198" fill="#1a120c"/>
+  <text x="300" y="418" text-anchor="middle" fill="#f4e7c5" font-family="Segoe UI, sans-serif" font-size="28" letter-spacing="6">FORGE</text>
+</svg>

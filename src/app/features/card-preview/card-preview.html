@@ -1,0 +1,56 @@
+<div
+  class="card-container"
+  tabindex="0"
+  role="button"
+  [attr.aria-pressed]="flipped()"
+  [attr.aria-label]="messages().ariaPreview"
+  (click)="toggleFlip()"
+  (keydown)="onPreviewKey($event)"
+>
+  <div class="card" [class.is-flipped]="flipped()">
+    <article
+      #front
+      class="card-face card-front"
+      [attr.data-frame]="view().frameId"
+      [attr.aria-hidden]="flipped()"
+      aria-live="polite"
+    >
+      <header class="card-header">
+        <span class="card-title">{{ view().title }}</span>
+        <span class="card-attribute" [attr.aria-label]="view().attributeAria">{{
+          view().attributeGlyph
+        }}</span>
+      </header>
+
+      <span
+        class="card-stars"
+        [class.is-hidden]="!view().showMonsterStats"
+        [attr.aria-hidden]="!view().showMonsterStats"
+        [attr.aria-label]="view().levelAria"
+        >{{ view().stars }}</span
+      >
+
+      <div class="art">
+        <img [src]="view().artworkUrl" [alt]="messages().ariaArt" />
+      </div>
+
+      <footer class="card-description">
+        <strong>{{ view().race }}</strong>
+        <p>{{ view().description }}</p>
+      </footer>
+    </article>
+
+    <article class="card-face card-back" [attr.aria-hidden]="!flipped()">
+      <div class="back-seal">
+        <div class="back-ring" aria-hidden="true"></div>
+        <p class="back-title">{{ messages().backTitle }}</p>
+      </div>
+    </article>
+  </div>
+</div>
+
+<p class="hint">
+  <span>{{ messages().hintPrefix }}</span>
+  <strong>{{ messages().hintKey }}</strong>
+  <span>{{ messages().hintSuffix }}</span>
+</p>

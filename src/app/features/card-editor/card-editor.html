@@ -1,0 +1,120 @@
+<form autocomplete="off" (submit)="$event.preventDefault()">
+  <app-fold-section [title]="messages().legendCore">
+    <div class="form-group">
+      <label for="card-name">{{ messages().labelName }}</label>
+      <input
+        id="card-name"
+        type="text"
+        [formField]="editor.name"
+        [placeholder]="messages().placeholderName"
+        [attr.aria-invalid]="editor.name().invalid()"
+        [attr.aria-describedby]="
+          editor.name().invalid() && editor.name().touched() ? 'name-error' : null
+        "
+      />
+      @if (editor.name().touched() && editor.name().invalid()) {
+        <p id="name-error" class="field-error" role="alert">{{ messages().errorNameLength }}</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="card-frame">{{ messages().labelType }}</label>
+      <select id="card-frame" [formField]="editor.frameId">
+        @for (frame of frames; track frame.id) {
+          <option [value]="frame.id">{{ messages()[frame.labelKey] }}</option>
+        }
+      </select>
+    </div>
+  </app-fold-section>
+
+  @if (!editor.attributeId().hidden()) {
+    <app-fold-section [title]="messages().legendMonster" [startCollapsed]="true">
+      <div class="form-group">
+        <label for="card-attribute">{{ messages().labelAttribute }}</label>
+        <select id="card-attribute" [formField]="editor.attributeId">
+          @for (attribute of attributes; track attribute.id) {
+            <option [value]="attribute.id">{{ messages()[attribute.labelKey] }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="card-level">{{ messages().labelLevel }}</label>
+        <input
+          id="card-level"
+          type="number"
+          [formField]="editor.level"
+          [attr.aria-invalid]="editor.level().invalid()"
+          [attr.aria-describedby]="
+            editor.level().invalid() && editor.level().touched() ? 'level-error' : null
+          "
+        />
+        @if (editor.level().touched() && editor.level().invalid()) {
+          <p id="level-error" class="field-error" role="alert">{{ messages().errorLevel }}</p>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="card-race">{{ messages().labelRace }}</label>
+        <input
+          id="card-race"
+          type="text"
+          [formField]="editor.race"
+          [placeholder]="messages().placeholderRace"
+        />
+      </div>
+    </app-fold-section>
+  }
+
+  <app-fold-section [title]="messages().legendVisuals" [startCollapsed]="true">
+    <div class="form-group">
+      <p id="art-caption" class="field-caption">{{ messages().labelArt }}</p>
+      <label class="upload-button" for="card-art">{{ messages().btnUpload }}</label>
+      <input
+        id="card-art"
+        class="visually-hidden"
+        type="file"
+        accept="image/*"
+        aria-labelledby="art-caption"
+        (change)="onArtworkSelected($event)"
+      />
+      @if (forge.artworkUrl()) {
+        <button type="button" class="text-button" (click)="clearArtwork()">
+          {{ messages().btnRemoveArt }}
+        </button>
+      }
+      @if (artworkIssue(); as issue) {
+        <p class="field-error" role="alert">
+          @switch (issue) {
+            @case ('type') {
+              {{ messages().artErrorType }}
+            }
+            @case ('size') {
+              {{ messages().artErrorSize }}
+            }
+            @case ('read') {
+              {{ messages().artErrorRead }}
+            }
+          }
+        </p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="card-text">{{ messages().labelDescription }}</label>
+      <textarea
+        id="card-text"
+        rows="4"
+        [formField]="editor.description"
+        [placeholder]="messages().placeholderText"
+      ></textarea>
+    </div>
+  </app-fold-section>
+
+  <button type="button" class="download-btn" (click)="requestDownload()" [disabled]="exporting()">
+    {{ exporting() ? messages().btnDownloading : messages().btnDownload }}
+  </button>
+  @if (exportFailed()) {
+    <p class="field-error" role="alert">{{ messages().downloadFailed }}</p>
+  }
+</form>

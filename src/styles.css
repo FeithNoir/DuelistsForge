@@ -1,0 +1,73 @@
+/* Subset of Noto Sans JP (SIL OFL) for the nine attribute marks. License: src/fonts/OFL.txt. */
+@font-face {
+  font-family: 'Forge Marks';
+  src: url('./fonts/noto-sans-jp-marks.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-color: #121212;
+  --sidebar-bg: #1e1e1e;
+  --text-color: #e8e8e8;
+  --muted-text: #d2d2d2;
+  --accent-color: #f1c40f;
+  --accent-hover: #d4ac0d;
+  --card-width: 300px;
+  --card-ratio: 300 / 440;
+  --yugi-border: #f1c40f;
+  --transition-speed: 0.8s;
+  --font-main: 'Segoe UI', 'Noto Sans', 'Noto Sans CJK JP', system-ui, sans-serif;
+  --star-bg: rgba(255, 69, 0, 0.85);
+  --attr-bg: rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+}
+
+body {
+  overflow-x: clip;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  html,
+  body {
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

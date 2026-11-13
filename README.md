@@ -1,44 +1,78 @@
-# Duelist's Forge: The Card Crafter 3D
+# Duelist's Forge
 
-Welcome to **Duelist's Forge**! An interactive web application designed to create, visualize, and download custom Yu-Gi-Oh! style cards with an immersive 3D flip effect.
+Aplicación para crear y previsualizar cartas de duelo originales, con editor en vivo y giro 3D. Es la migración a **Angular 22** del prototipo HTML/CSS/JS que sigue en [`legacy/`](legacy/).
 
-## Key Features
+No usa arte ni logotipos de Konami. Los marcos son gradientes CSS, el reverso es un sello geométrico propio y el arte vacío es un SVG original.
 
-- **Dynamic Sidebar**: Form fields automatically hide or show based on the selected card type (e.g., hiding levels and attributes for Spells or Traps).
-- **Responsive Layout**: An optimized CSS Grid system that prevents page overflow and ensures a smooth experience across all screen sizes.
-- **Language Selector**: A bilingual interface that allows users to switch between English and Spanish seamlessly, featuring flag emojis (🇺🇸/🇲🇽).
-- **Custom Image Upload**: A custom-styled upload button that lets you personalize your card with your own artwork.
-- **Card Export**: High-quality PNG download functionality powered by `html2canvas`, allowing you to save your creations.
-- **Dynamic Star System**: Automatic generation of level/rank stars via JavaScript, contained within a single optimized and styled element.
-- **Immersive 3D Effect**: Interactive card rotation triggered by clicking or keyboard focus, providing a premium "reveal" feel. 
-- **Collapsible Sidebar**: Organization of customization options into foldable sections (fieldset) for a cleaner UI, with the most relevant info open by default.
-- **Improved Aesthetics**: Rounded capsules for level stars and attributes, smoother gradients for pendulum cards, and a warm forge-like background for the preview area.
-- **Accessibility (WCAG AA)**: Built with web accessibility in mind, including full keyboard navigation (Tab key to flip), semantic HTML5, and ARIA landmarks.
+![Editor en escritorio](docs/screenshots/editor-escritorio.png)
 
-## Technologies Used
+## Qué conserva del prototipo
 
-- **HTML5**: For semantic structure and core content.
-- **CSS3**: Utilizing Grid, Flexbox, and 3D transformations for the layout and animation.
-- **JavaScript (Vanilla)**: Handling real-time UI updates, file processing, and the internationalization (i18n) system.
-- **html2canvas**: A powerful library used to capture and export the card as an image.
+- Editor con secciones plegables y campos que aparecen solo en monstruos.
+- Ocho tipos de carta, siete atributos y estrellas de nivel (1 a 12).
+- Vista previa en vivo, en inglés y en español.
+- Giro 3D con clic, Enter o Espacio, y foco con Tab.
+- Subida de imagen propia y descarga PNG del frente.
+- Diseño oscuro, adaptable y usable con teclado.
 
-## How to Use
+## Cómo correrlo
 
-1. Open `index.html` in any modern web browser.
-2. Use the sidebar to fill in your card's details such as Name, Type, and Description.
-3. Click the "Upload Image" button to add your custom art.
-4. Interact with the card by clicking it or using the **Tab** key to trigger the 3D flip effect and reveal its contents.
-5. Click the **Download Card** button to save a PNG of your design to your device.
+Requiere Node.js 22 o superior y npm 10.
 
-## Potential Future Features (Roadmap)
+```bash
+npm install
+npm start
+```
 
-- **Holographic Foils**: Implementation of CSS-based holographic overlays to simulate "Secret Rare" or "Ultra Rare" card effects.
-- **Deck Manager**: A feature to save multiple cards into a local collection using `localStorage`, allowing for deck building.
-- **Additional Templates**: Support for different card generations (e.g., Classic, Synchro, Xyz, Link) with era-accurate frames and fonts.
-- **Interactive Duels**: A basic simulator to track life points and field positions for created cards.
-- **Cloud Storage**: Integration with a backend service to store and share card designs via unique links.
-- **Advanced Text Formatting**: Support for specialized symbols (e.g., ATK/DEF icons) and rich text in the description box.
+Abre `http://127.0.0.1:4200/`. El prototipo viejo se abre aparte:
 
-## Author
+```bash
+cd legacy
+python3 -m http.server 8080
+```
 
-Developed by [feithnoir](https://github.com/feithnoir)
+## Scripts
+
+| Comando                  | Qué hace                                             |
+| ------------------------ | ---------------------------------------------------- |
+| `npm start`              | Servidor de desarrollo                               |
+| `npm test`               | Vitest una vez (`ng test --watch=false`)             |
+| `npm run test:watch`     | Vitest en modo observación                           |
+| `npm run lint`           | ESLint                                               |
+| `npm run format`         | Prettier                                             |
+| `npm run build`          | Build de producción en `dist/duelists-forge/browser` |
+| `npm run build:gh-pages` | El mismo build con `--base-href /DuelistsForge/`     |
+
+## Documentación
+
+El relato completo de la migración está en [docs/tutorial-angular-duelistsforge.md](docs/tutorial-angular-duelistsforge.md) (serie _De prototipo a Angular_).
+
+Notas por tema, en `docs/files/`:
+
+- [Arquitectura](docs/files/01-arquitectura.md)
+- [Modelos y datos](docs/files/02-modelos-y-datos.md)
+- [Servicios y estado](docs/files/03-servicios-y-estado.md)
+- [Componentes y formulario](docs/files/04-componentes-y-formulario.md)
+- [Giro 3D](docs/files/05-efecto-3d.md)
+- [Accesibilidad y responsive](docs/files/06-accesibilidad-y-responsive.md)
+- [Pruebas y calidad](docs/files/07-pruebas-y-calidad.md)
+- [Build y despliegue](docs/files/08-build-y-despliegue.md)
+- [Cómo extenderla](docs/files/09-como-extender.md)
+
+## Estructura
+
+```text
+legacy/                 prototipo original
+public/                 favicon y arte vacío
+src/app/core/           modelos, datos, funciones puras, servicios
+src/app/shared/         piezas reutilizables
+src/app/features/       editor, preview y página de la forja
+src/fonts/              subset OFL para los nueve glifos de atributo
+docs/                   tutorial, notas y capturas
+```
+
+## Licencia
+
+Código bajo [MIT](LICENSE). El subset tipográfico de los glifos está bajo SIL OFL: [src/fonts/OFL.txt](src/fonts/OFL.txt).
+
+Desarrollado por [feithnoir](https://github.com/feithnoir).
